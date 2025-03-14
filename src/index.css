@@ -98,7 +98,8 @@
     @apply prose prose-lg prose-slate max-w-none;
   }
 
-  .transition-all {
+  /* Fixed circular dependency by renaming the class */
+  .transition-standard {
     @apply transition-all duration-300 ease-in-out;
   }
 }
