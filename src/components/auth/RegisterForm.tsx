@@ -78,7 +78,24 @@ const RegisterForm: React.FC = () => {
     try {
       // In a real app, this would be an API call to register the user
       console.log('Registration data:', data);
-      setRegistrationData(data);
+      
+      // Create a RegisterData object with all required fields
+      const registerData: RegisterData = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+        dialCode: data.dialCode,
+        password: data.password,
+        pin: data.pin,
+        address: data.address,
+        postcode: data.postcode,
+        city: data.city,
+        state: data.state,
+        country: data.country
+      };
+      
+      setRegistrationData(registerData);
       
       // Mock successful registration, show OTP verification form
       setTimeout(() => {
