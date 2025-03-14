@@ -1,16 +1,20 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Search, User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Update scroll status
   useEffect(() => {
@@ -29,7 +33,17 @@ const Navbar: React.FC = () => {
   // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
+    setIsSearchOpen(false);
   }, [location.pathname]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Navigate to search results page with the query
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+    }
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -42,7 +56,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed w-full top-0 left-0 z-50 transition-all duration-300 ${
+      className={`fixed w-full top-0 left-0 z-50 transition-standard ${
         isScrolled ? 'bg-white/90 backdrop-blur-md shadow-soft py-2' : 'bg-transparent py-4'
       }`}
     >
@@ -62,7 +76,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-standard hover:text-primary ${
                   location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
                 }`}
               >
@@ -73,9 +87,38 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" aria-label="Search">
-              <Search className="h-5 w-5" />
-            </Button>
+            {/* Desktop Search */}
+            <div className="relative">
+              {isSearchOpen ? (
+                <form onSubmit={handleSearch} className="flex items-center">
+                  <Input
+                    type="search"
+                    placeholder="Search articles..."
+                    className="w-60 pr-10"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                  />
+                  <Button 
+                    type="submit" 
+                    variant="ghost" 
+                    size="icon" 
+                    className="absolute right-0"
+                  >
+                    <Search className="h-5 w-5" />
+                  </Button>
+                </form>
+              ) : (
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  aria-label="Search" 
+                  onClick={() => setIsSearchOpen(true)}
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              )}
+            </div>
             
             {isAuthenticated ? (
               <div className="flex items-center space-x-3">
@@ -117,9 +160,41 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button variant="ghost" size="icon" aria-label="Search">
-              <Search className="h-5 w-5" />
-            </Button>
+            {/* Mobile Search */}
+            {isSearchOpen ? (
+              <form 
+                onSubmit={handleSearch} 
+                className="fixed inset-x-0 top-0 p-4 bg-background z-50 flex items-center shadow-md"
+              >
+                <Input
+                  type="search"
+                  placeholder="Search articles..."
+                  className="flex-1 mr-2"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+                <Button type="submit" variant="ghost" size="icon">
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => setIsSearchOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </form>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                aria-label="Search"
+                onClick={() => setIsSearchOpen(true)}
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            )}
             <Button 
               variant="ghost" 
               size="icon"
@@ -152,7 +227,7 @@ const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`block py-2 text-base font-medium transition-colors ${
+                    className={`block py-2 text-base font-medium transition-standard ${
                       location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
                     }`}
                   >
