@@ -49,7 +49,6 @@ const StoriesSlider: React.FC<StoriesSliderProps> = ({ stories }) => {
           className="w-full overflow-x-auto"
         >
           <div className="flex space-x-4 py-2 px-4">
-            {/* Story Items */}
             {stories.map((story) => (
               <StoryItem
                 key={story.id}
