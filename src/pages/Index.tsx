@@ -49,7 +49,21 @@ const Index: React.FC = () => {
     },
   ];
 
-  // Mock news articles
+  // Default placeholder images for news without images
+  const placeholderImages = [
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80",
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80",
+    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80",
+  ];
+
+  // Function to get a random placeholder image
+  const getRandomPlaceholder = () => {
+    const randomIndex = Math.floor(Math.random() * placeholderImages.length);
+    return placeholderImages[randomIndex];
+  };
+
+  // Mock news articles with default placeholder images
   const newsArticles = [
     {
       id: '1',
@@ -66,7 +80,7 @@ const Index: React.FC = () => {
       title: 'Global Markets React to Latest Economic Policy Shifts',
       slug: 'global-markets-economic-policy',
       excerpt: 'Financial experts analyze the implications of new economic policies on global markets and investment strategies.',
-      coverImage: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80',
+      coverImage: getRandomPlaceholder(),
       publishedAt: new Date('2023-10-12'),
       readTime: 6,
       categories: [{ id: '2', name: 'Business', slug: 'business' }],
@@ -76,7 +90,7 @@ const Index: React.FC = () => {
       title: 'The Science Behind Climate Change: New Research Findings',
       slug: 'science-climate-change',
       excerpt: 'Leading scientists publish groundbreaking research on climate patterns and their implications for global policy.',
-      coverImage: 'https://images.unsplash.com/photo-1581229876567-374f28aa7fe0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80',
+      coverImage: getRandomPlaceholder(),
       publishedAt: new Date('2023-10-10'),
       readTime: 7,
       categories: [{ id: '3', name: 'Science', slug: 'science' }],
@@ -86,7 +100,7 @@ const Index: React.FC = () => {
       title: 'Political Landscape Shifts Following Latest Elections',
       slug: 'political-landscape-elections',
       excerpt: 'Analysis of recent election results and what they signal for upcoming policy decisions and governance.',
-      coverImage: 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80',
+      coverImage: getRandomPlaceholder(),
       publishedAt: new Date('2023-10-08'),
       readTime: 5,
       categories: [{ id: '4', name: 'Politics', slug: 'politics' }],
@@ -96,7 +110,7 @@ const Index: React.FC = () => {
       title: 'Virtual Reality in Education: Transforming Learning Experiences',
       slug: 'vr-education-transformation',
       excerpt: 'How VR technology is being implemented in classrooms to create immersive educational experiences.',
-      coverImage: 'https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80',
+      coverImage: getRandomPlaceholder(),
       publishedAt: new Date('2023-10-05'),
       readTime: 4,
       categories: [{ id: '1', name: 'Technology', slug: 'technology' }],
@@ -106,7 +120,7 @@ const Index: React.FC = () => {
       title: 'New Archaeological Discovery Rewrites Ancient History',
       slug: 'archaeological-discovery-history',
       excerpt: 'Archaeologists unearth artifacts that challenge our understanding of ancient civilizations.',
-      coverImage: 'https://images.unsplash.com/photo-1532598187460-98fe8826d1e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600&q=80',
+      coverImage: getRandomPlaceholder(),
       publishedAt: new Date('2023-10-03'),
       readTime: 6,
       categories: [{ id: '5', name: 'Culture', slug: 'culture' }],
@@ -213,8 +227,6 @@ const Index: React.FC = () => {
           </div>
         </section>
       </main>
-      
-      <Footer />
     </div>
   );
 };
