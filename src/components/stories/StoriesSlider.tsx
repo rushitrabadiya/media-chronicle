@@ -48,7 +48,6 @@ const StoriesSlider: React.FC<StoriesSliderProps> = ({ stories }) => {
         <ScrollArea 
           ref={scrollRef}
           className="w-full overflow-x-auto"
-          orientation="horizontal"
         >
           <div className="flex space-x-4 py-2 px-4">
             {/* Create Story Item */}
