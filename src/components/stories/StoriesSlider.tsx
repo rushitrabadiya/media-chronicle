@@ -1,10 +1,9 @@
 
 import React from 'react';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import StoryItem from './StoryItem';
-import { Link } from 'react-router-dom';
 
 interface Story {
   id: string;
@@ -50,14 +49,6 @@ const StoriesSlider: React.FC<StoriesSliderProps> = ({ stories }) => {
           className="w-full overflow-x-auto"
         >
           <div className="flex space-x-4 py-2 px-4">
-            {/* Create Story Item */}
-            <Link to="/create-story" className="block">
-              <div className="relative w-20 h-32 md:w-24 md:h-36 rounded-xl overflow-hidden border-2 border-dashed border-muted-foreground/40 flex flex-col items-center justify-center hover-scale bg-muted/30">
-                <Plus className="h-6 w-6 text-muted-foreground mb-2" />
-                <span className="text-xs text-muted-foreground">Create</span>
-              </div>
-            </Link>
-            
             {/* Story Items */}
             {stories.map((story) => (
               <StoryItem

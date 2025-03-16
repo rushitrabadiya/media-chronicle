@@ -15,8 +15,11 @@ import ArticlePage from "./pages/ArticlePage";
 import StoryPage from "./pages/StoryPage";
 import AboutPage from "./pages/company/AboutPage";
 import ContactPage from "./pages/company/ContactPage";
+import CareersPage from "./pages/company/CareersPage";
+import AdvertisePage from "./pages/company/AdvertisePage";
 import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
+import CookiePolicyPage from "./pages/legal/CookiePolicyPage";
 
 const queryClient = new QueryClient();
 
@@ -39,10 +42,13 @@ const App = () => (
           {/* Company Pages */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/advertise" element={<AdvertisePage />} />
           
           {/* Legal Pages */}
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/cookies" element={<CookiePolicyPage />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

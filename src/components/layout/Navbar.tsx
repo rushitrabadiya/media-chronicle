@@ -2,10 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { Search, User, Menu, X } from 'lucide-react';
+import { Search, User, Menu, X, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -45,14 +53,25 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Politics', path: '/category/politics' },
-    { name: 'Technology', path: '/category/technology' },
-    { name: 'Business', path: '/category/business' },
-    { name: 'Culture', path: '/category/culture' },
-    { name: 'Science', path: '/category/science' },
-  ];
+  const categoryGroups = {
+    'News': [
+      { name: 'Politics', path: '/category/politics' },
+      { name: 'Business', path: '/category/business' },
+      { name: 'International', path: '/category/international' },
+    ],
+    'Topics': [
+      { name: 'Technology', path: '/category/technology' },
+      { name: 'Science', path: '/category/science' },
+      { name: 'Health', path: '/category/health' },
+      { name: 'Environment', path: '/category/environment' },
+    ],
+    'Culture': [
+      { name: 'Arts', path: '/category/arts' },
+      { name: 'Style', path: '/category/style' },
+      { name: 'Food', path: '/category/food' },
+      { name: 'Travel', path: '/category/travel' },
+    ]
+  };
 
   return (
     <header
@@ -72,17 +91,44 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-standard hover:text-primary ${
-                  location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            <Link
+              to="/"
+              className={`text-sm font-medium transition-standard hover:text-primary ${
+                location.pathname === '/' ? 'text-primary' : 'text-foreground/80'
+              }`}
+            >
+              Home
+            </Link>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="text-sm font-medium p-0 h-auto">
+                  Categories <Filter className="ml-1 h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {Object.entries(categoryGroups).map(([group, categories]) => (
+                  <React.Fragment key={group}>
+                    <DropdownMenuLabel>{group}</DropdownMenuLabel>
+                    {categories.map((category) => (
+                      <DropdownMenuItem key={category.path} asChild>
+                        <Link to={category.path}>{category.name}</Link>
+                      </DropdownMenuItem>
+                    ))}
+                    <DropdownMenuSeparator />
+                  </React.Fragment>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <Link
+              to="/trending"
+              className={`text-sm font-medium transition-standard hover:text-primary ${
+                location.pathname === '/trending' ? 'text-primary' : 'text-foreground/80'
+              }`}
+            >
+              Trending
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
@@ -121,27 +167,43 @@ const Navbar: React.FC = () => {
             </div>
             
             {isAuthenticated ? (
-              <div className="flex items-center space-x-3">
-                <Link to="/profile">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center overflow-hidden">
-                      {user?.profilePicture ? (
-                        <img 
-                          src={user.profilePicture} 
-                          alt={`${user.firstName} ${user.lastName}`} 
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <User className="h-4 w-4 text-muted-foreground" />
-                      )}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="p-0 h-8">
+                    <div className="flex items-center space-x-2">
+                      <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center overflow-hidden">
+                        {user?.profilePicture ? (
+                          <img 
+                            src={user.profilePicture} 
+                            alt={`${user.firstName} ${user.lastName}`} 
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <User className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </div>
+                      <span className="text-sm font-medium">{user?.firstName}</span>
                     </div>
-                    <span className="text-sm font-medium">{user?.firstName}</span>
-                  </div>
-                </Link>
-                <Button variant="ghost" size="sm" onClick={logout}>
-                  Sign Out
-                </Button>
-              </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/bookmarks">Bookmarks</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/settings">Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout}>
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <div className="flex items-center space-x-2">
                 <Link to="/auth/login">
@@ -223,17 +285,43 @@ const Navbar: React.FC = () => {
           >
             <div className="p-4 space-y-6">
               <div className="space-y-3 pt-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={`block py-2 text-base font-medium transition-standard ${
-                      location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                <Link
+                  to="/"
+                  className={`block py-2 text-base font-medium transition-standard ${
+                    location.pathname === '/' ? 'text-primary' : 'text-foreground/80'
+                  }`}
+                >
+                  Home
+                </Link>
+
+                <div className="py-2">
+                  <p className="text-base font-medium mb-2">Categories</p>
+                  <div className="grid grid-cols-2 gap-2 pl-2">
+                    {Object.entries(categoryGroups).map(([group, categories]) => (
+                      <div key={group} className="space-y-2">
+                        <p className="text-sm font-medium text-muted-foreground">{group}</p>
+                        {categories.map((category) => (
+                          <Link
+                            key={category.path}
+                            to={category.path}
+                            className="block text-sm py-1 text-foreground/80 hover:text-primary"
+                          >
+                            {category.name}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Link
+                  to="/trending"
+                  className={`block py-2 text-base font-medium transition-standard ${
+                    location.pathname === '/trending' ? 'text-primary' : 'text-foreground/80'
+                  }`}
+                >
+                  Trending
+                </Link>
               </div>
               
               <div className="pt-6 border-t border-border">
@@ -255,6 +343,12 @@ const Navbar: React.FC = () => {
                         <p className="text-sm font-medium">{`${user?.firstName} ${user?.lastName}`}</p>
                         <p className="text-xs text-muted-foreground">{user?.email}</p>
                       </div>
+                    </Link>
+                    <Link to="/bookmarks" className="block py-2 text-sm">
+                      Bookmarks
+                    </Link>
+                    <Link to="/settings" className="block py-2 text-sm">
+                      Settings
                     </Link>
                     <Button className="w-full" variant="outline" onClick={logout}>
                       Sign Out
