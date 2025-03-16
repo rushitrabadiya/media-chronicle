@@ -12,6 +12,11 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import CategoryPage from "./pages/CategoryPage";
 import SearchPage from "./pages/SearchPage";
 import ArticlePage from "./pages/ArticlePage";
+import StoryPage from "./pages/StoryPage";
+import AboutPage from "./pages/company/AboutPage";
+import ContactPage from "./pages/company/ContactPage";
+import TermsPage from "./pages/legal/TermsPage";
+import PrivacyPage from "./pages/legal/PrivacyPage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +34,16 @@ const App = () => (
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/article/:slug" element={<ArticlePage />} />
+          <Route path="/story/:id" element={<StoryPage />} />
+          
+          {/* Company Pages */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          
+          {/* Legal Pages */}
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

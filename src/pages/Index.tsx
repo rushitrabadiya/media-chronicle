@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import FeaturedArticle from '@/components/articles/FeaturedArticle';
 import ArticleCard from '@/components/articles/ArticleCard';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import StoriesSlider from '@/components/stories/StoriesSlider';
 
 const Index: React.FC = () => {
   // Mock data
@@ -97,6 +97,45 @@ const Index: React.FC = () => {
     },
   ];
 
+  // Mock stories data
+  const stories = [
+    {
+      id: "1",
+      title: "Tech Evolution in 2023",
+      coverImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&h=900&q=80",
+      authorName: "Alex Johnson",
+      authorImage: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
+    },
+    {
+      id: "2",
+      title: "Future of AI",
+      coverImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&h=900&q=80",
+      authorName: "Samantha Lee",
+      authorImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
+    },
+    {
+      id: "3",
+      title: "Climate Solutions",
+      coverImage: "https://images.unsplash.com/photo-1569163139500-56d8c1d5361a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&h=900&q=80",
+      authorName: "Marcus Green",
+      authorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
+    },
+    {
+      id: "4",
+      title: "Travel Trends",
+      coverImage: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&h=900&q=80",
+      authorName: "Emma Wilson",
+      authorImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
+    },
+    {
+      id: "5",
+      title: "Culinary Innovations",
+      coverImage: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&h=900&q=80",
+      authorName: "David Chang",
+      authorImage: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
+    },
+  ];
+
   // Smooth scroll to top on page load
   useEffect(() => {
     window.scrollTo({
@@ -111,6 +150,14 @@ const Index: React.FC = () => {
       
       {/* Main Content */}
       <main className="flex-grow pt-24">
+        {/* Stories Section */}
+        <section className="py-2">
+          <div className="page-container">
+            <h2 className="text-xl font-display font-bold mb-2 px-4">Stories</h2>
+            <StoriesSlider stories={stories} />
+          </div>
+        </section>
+
         {/* Hero Section with Featured Article */}
         <section className="py-8 md:py-12">
           <div className="page-container">
