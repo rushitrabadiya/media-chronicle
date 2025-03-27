@@ -6,6 +6,10 @@ import {
   Users,
   Settings,
   LayoutDashboard,
+  Shield,
+  FolderTree,
+  Menu,
+  FileCode,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -37,9 +41,29 @@ export function AdminSidebar() {
       icon: Users,
     },
     {
+      title: "Posts",
+      path: "/admin/posts",
+      icon: FileText,
+    },
+    {
       title: "Content",
       path: "/admin/content",
-      icon: FileText,
+      icon: FileCode,
+    },
+    {
+      title: "Categories",
+      path: "/admin/categories",
+      icon: FolderTree,
+    },
+    {
+      title: "Roles",
+      path: "/admin/roles",
+      icon: Shield,
+    },
+    {
+      title: "Menus",
+      path: "/admin/menus",
+      icon: Menu,
     },
     {
       title: "Analytics",

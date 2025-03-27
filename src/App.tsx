@@ -29,6 +29,10 @@ import UsersPage from "./pages/admin/UsersPage";
 import ContentPage from "./pages/admin/ContentPage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
 import SettingsPage from "./pages/admin/SettingsPage";
+import RolesPage from "./pages/admin/RolesPage";
+import CategoriesPage from "./pages/admin/CategoriesPage";
+import MenusPage from "./pages/admin/MenusPage";
+import PostsPage from "./pages/admin/PostsPage";
 import { AuthProvider } from "./context/AuthContext";
 import { RequireAdmin } from "./hooks/use-admin";
 
@@ -69,6 +73,10 @@ const App = () => {
                   <Route index element={<Dashboard />} />
                   <Route path="users" element={<UsersPage />} />
                   <Route path="content" element={<ContentPage />} />
+                  <Route path="posts" element={<PostsPage />} />
+                  <Route path="categories" element={<CategoriesPage />} />
+                  <Route path="roles" element={<RolesPage />} />
+                  <Route path="menus" element={<MenusPage />} />
                   <Route path="analytics" element={<AnalyticsPage />} />
                   <Route path="settings" element={<SettingsPage />} />
                 </Route>

@@ -1,10 +1,12 @@
+
 // User type definition
 export interface User {
   id: string;
   email: string;
   name?: string;
-  role?: 'user' | 'admin';
+  role?: 'user' | 'admin' | 'editor' | 'moderator';
   avatar?: string;
+  permissions?: string[];
 }
 
 // Login credentials interface
@@ -54,6 +56,8 @@ export interface Category {
   id: string;
   name: string;
   slug: string;
+  parentId?: string;
+  subcategories?: Category[];
 }
 
 // Author interface
@@ -83,4 +87,48 @@ export interface Comment {
   authorAvatar?: string;
   createdAt: Date;
   likes: number;
+}
+
+// Role interface
+export interface Role {
+  id: string;
+  name: string;
+  description?: string;
+  permissions: Permission[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Permission interface
+export interface Permission {
+  id: string;
+  name: string;
+  description?: string;
+  module: string;
+  action: 'create' | 'read' | 'update' | 'delete' | 'all';
+}
+
+// Menu interface
+export interface Menu {
+  id: string;
+  name: string;
+  path: string;
+  icon?: string;
+  parentId?: string;
+  order: number;
+  permissions?: string[];
+  children?: Menu[];
+}
+
+// News interface
+export interface News {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  type: 'full' | 'short';
+  publishedAt: Date;
+  author: Author;
+  categories: Category[];
 }
