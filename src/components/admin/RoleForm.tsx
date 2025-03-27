@@ -9,36 +9,36 @@ import { Role, Permission } from "@/utils/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Mock permissions list
+// Mock permissions list with properly typed action values
 const mockModules = [
   {
     name: "Users",
     permissions: [
-      { id: "1", name: "Create Users", description: "Can create new users", module: "users", action: "create" },
-      { id: "2", name: "View Users", description: "Can view users", module: "users", action: "read" },
-      { id: "3", name: "Edit Users", description: "Can edit users", module: "users", action: "update" },
-      { id: "4", name: "Delete Users", description: "Can delete users", module: "users", action: "delete" },
+      { id: "1", name: "Create Users", description: "Can create new users", module: "users", action: "create" as const },
+      { id: "2", name: "View Users", description: "Can view users", module: "users", action: "read" as const },
+      { id: "3", name: "Edit Users", description: "Can edit users", module: "users", action: "update" as const },
+      { id: "4", name: "Delete Users", description: "Can delete users", module: "users", action: "delete" as const },
     ]
   },
   {
     name: "Content",
     permissions: [
-      { id: "5", name: "Create Content", description: "Can create new content", module: "content", action: "create" },
-      { id: "6", name: "View Content", description: "Can view content", module: "content", action: "read" },
-      { id: "7", name: "Edit Content", description: "Can edit content", module: "content", action: "update" },
-      { id: "8", name: "Delete Content", description: "Can delete content", module: "content", action: "delete" },
+      { id: "5", name: "Create Content", description: "Can create new content", module: "content", action: "create" as const },
+      { id: "6", name: "View Content", description: "Can view content", module: "content", action: "read" as const },
+      { id: "7", name: "Edit Content", description: "Can edit content", module: "content", action: "update" as const },
+      { id: "8", name: "Delete Content", description: "Can delete content", module: "content", action: "delete" as const },
     ]
   },
   {
     name: "Categories",
     permissions: [
-      { id: "9", name: "Manage Categories", description: "Can manage categories", module: "categories", action: "all" },
+      { id: "9", name: "Manage Categories", description: "Can manage categories", module: "categories", action: "all" as const },
     ]
   },
   {
     name: "Menus",
     permissions: [
-      { id: "10", name: "Manage Menus", description: "Can manage menus", module: "menus", action: "all" },
+      { id: "10", name: "Manage Menus", description: "Can manage menus", module: "menus", action: "all" as const },
     ]
   }
 ];
