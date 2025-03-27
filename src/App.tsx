@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -29,53 +30,58 @@ import ContentPage from "./pages/admin/ContentPage";
 import AnalyticsPage from "./pages/admin/AnalyticsPage";
 import SettingsPage from "./pages/admin/SettingsPage";
 import { AuthProvider } from "./context/AuthContext";
+import { RequireAdmin } from "./hooks/use-admin";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Register />} />
-            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-            <Route path="/category/:category" element={<CategoryPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/article/:slug" element={<ArticlePage />} />
-            <Route path="/story/:id" element={<StoryPage />} />
-            
-            {/* Company Pages */}
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/advertise" element={<AdvertisePage />} />
-            
-            {/* Legal Pages */}
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/cookies" element={<CookiePolicyPage />} />
-            
-            {/* Admin Routes */}
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="users" element={<UsersPage />} />
-              <Route path="content" element={<ContentPage />} />
-              <Route path="analytics" element={<AnalyticsPage />} />
-              <Route path="settings" element={<SettingsPage />} />
-            </Route>
-            
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth/login" element={<Login />} />
+                <Route path="/auth/register" element={<Register />} />
+                <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+                <Route path="/category/:category" element={<CategoryPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/article/:slug" element={<ArticlePage />} />
+                <Route path="/story/:id" element={<StoryPage />} />
+                
+                {/* Company Pages */}
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/careers" element={<CareersPage />} />
+                <Route path="/advertise" element={<AdvertisePage />} />
+                
+                {/* Legal Pages */}
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/cookies" element={<CookiePolicyPage />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin" element={<RequireAdmin><AdminLayout /></RequireAdmin>}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="users" element={<UsersPage />} />
+                  <Route path="content" element={<ContentPage />} />
+                  <Route path="analytics" element={<AnalyticsPage />} />
+                  <Route path="settings" element={<SettingsPage />} />
+                </Route>
+                
+                {/* Catch-all */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+};
 
 export default App;

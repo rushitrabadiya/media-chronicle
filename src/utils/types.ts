@@ -8,6 +8,22 @@ export interface User {
   avatar?: string;
 }
 
+// Login credentials interface
+export interface LoginCredentials {
+  email: string;
+  password: string;
+  remember?: boolean;
+}
+
+// Register data interface
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+  agreeToTerms?: boolean;
+}
+
 // Article interface
 export interface Article {
   id: string;
