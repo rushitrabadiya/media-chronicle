@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -200,33 +199,9 @@ const Index: React.FC = () => {
             </div>
           </div>
         </section>
-
-        {/* Newsletter Section */}
-        <section className="py-16 bg-primary/5">
-          <div className="page-container">
-            <div className="max-w-3xl mx-auto text-center">
-              <span className="text-sm font-medium text-primary mb-2 block">Stay Updated</span>
-              <h2 className="text-3xl font-display font-bold mb-4">
-                Subscribe to Our Newsletter
-              </h2>
-              <p className="text-muted-foreground mb-8 text-lg">
-                Get the latest news, features, and updates delivered directly to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                />
-                <Button>Subscribe</Button>
-              </div>
-              <p className="text-xs text-muted-foreground mt-3">
-                By subscribing, you agree to our Privacy Policy and consent to receive news from us.
-              </p>
-            </div>
-          </div>
-        </section>
       </main>
+      
+      <Footer />
     </div>
   );
 };
