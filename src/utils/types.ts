@@ -1,4 +1,3 @@
-
 // User type definition
 export interface User {
   id: string;
@@ -10,18 +9,30 @@ export interface User {
 
 // Login credentials interface
 export interface LoginCredentials {
-  email: string;
+  email?: string;
   password: string;
   remember?: boolean;
+  phoneNumber?: string;
+  dialCode?: string;
 }
 
 // Register data interface
 export interface RegisterData {
-  name: string;
+  name?: string;
   email: string;
   password: string;
   confirmPassword?: string;
   agreeToTerms?: boolean;
+  firstName?: string;
+  lastName?: string;
+  phoneNumber?: string;
+  dialCode?: string;
+  pin?: string;
+  address?: string;
+  postcode?: string;
+  city?: string;
+  state?: string;
+  country?: string;
 }
 
 // Article interface
