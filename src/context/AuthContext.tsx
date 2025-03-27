@@ -34,6 +34,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.error('Failed to parse stored user', error);
         localStorage.removeItem('user');
       }
+    } else {
+      // For demonstration purposes, create a default admin user
+      // In a real app, this would be handled by a proper authentication flow
+      const adminUser: User = {
+        id: 'admin1',
+        email: 'admin@example.com',
+        name: 'Admin User',
+        role: 'admin',
+      };
+      setUser(adminUser);
+      localStorage.setItem('user', JSON.stringify(adminUser));
     }
     setIsLoading(false);
   }, []);
