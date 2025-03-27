@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -83,7 +82,7 @@ const CategoriesPage: React.FC = () => {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   
   const handleAddCategory = (newCategory: Category) => {
-    if (newCategory.parentId) {
+    if (newCategory.parentId && newCategory.parentId !== "none") {
       // Add as subcategory
       setCategories(prevCategories => {
         return prevCategories.map(category => {

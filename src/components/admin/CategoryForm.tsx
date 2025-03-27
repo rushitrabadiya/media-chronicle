@@ -25,7 +25,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
 }) => {
   const [name, setName] = useState(category?.name || "");
   const [slug, setSlug] = useState(category?.slug || "");
-  const [parentId, setParentId] = useState(category?.parentId || "");
+  const [parentId, setParentId] = useState(category?.parentId || "none");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       id: category?.id || `category-${Date.now()}`,
       name,
       slug: finalSlug,
-      ...(parentId ? { parentId } : {}),
+      ...(parentId && parentId !== "none" ? { parentId } : {}),
     };
     
     onSubmit(newCategory);
@@ -86,7 +86,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
               <SelectValue placeholder="Select a parent category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">None (Top-level category)</SelectItem>
+              <SelectItem value="none">None (Top-level category)</SelectItem>
               {categories.map((cat) => (
                 <SelectItem key={cat.id} value={cat.id}>
                   {cat.name}
